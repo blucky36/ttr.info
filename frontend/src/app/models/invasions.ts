@@ -1,5 +1,4 @@
-const moment = require('moment');
-
+import * as moment from 'moment';
 /**
  * district: string
  * cog: string;
@@ -7,17 +6,17 @@ const moment = require('moment');
  * defeated: number
  * remaining: number
  */
-class Invasion {
+export class Invasion {
     /**
      * The distric the invasion is taking place in.
      * { string }
      */
-    district;
+    district: string;
     /**
      * The cog type the invasion is.
      * { string }
      */
-    cog;
+    cog: string;
     /**
      * The time the invasion started.
      */
@@ -26,12 +25,12 @@ class Invasion {
      * The number of defeated cogs in the invasion.
      * { number }
      */
-    defeated;
+    defeated: number;
     /**
      * The number of remaining cogs in the invasion.
      * { number }
      */
-    remaining;
+    remaining: number;
 
     constructor(district, { asOf, type, progress }) {
         const [defeated, remaining] = progress.split('/');
@@ -47,15 +46,15 @@ class Invasion {
  * lastUpdated {timestamp}
  * invasions {Invasion[]}
  */
-class Invasions {
+export class Invasions {
     /**
      * Timestamp when the api call was made.
      */
-    lastUpdated;
+    lastUpdated: any;
     /**
      * { Invasion[] }
      */
-    invasions;
+    invasions: Invasion[];
 
     constructor({ data }) {
         this.lastUpdated = moment(data.lastUpdated)
@@ -77,5 +76,3 @@ class Invasions {
             .map(district => new Invasion(district, invasionObj[district]));
     }
 }
-
-module.exports = { Invasion, Invasions }

@@ -1,4 +1,4 @@
-const moment = require('moment');
+import * as moment from 'moment';
 
 /**
  * lastUpdated: timestamp
@@ -6,19 +6,19 @@ const moment = require('moment');
  * populationByDistrict: { [district: string]: number }
  * districtsToArray: function(): { district: string, population: number }[]
  */
-class Population {
+export class Population {
     /**
      * Timestamp translated to human readable form from moment.
      */
-    lastUpdated;
+    lastUpdated: any;
     /**
      * Total population integer currently in game.
      */
-    totalPopulation;
+    totalPopulation: number;
     /**
      * A hash of populations by district.
      */
-    populationByDistrict;
+    populationByDistrict: { [district: string]: number };
 
     constructor({ data }) {
         this.lastUpdated = moment(data.lastUpdated);
@@ -29,13 +29,22 @@ class Population {
     /**
      * @return { { district: string, population: number }[] }
      */
-    districtsToArray() {
+    districtsToArray(): {district: string, population: number}[] {
         return Object.keys(this.populationByDistrict)
             .map(district => ({
                 district,
-                population: this.populationByDistrict[district],
+                population: Number(this.populationByDistrict[district]),
             }));
     }
-}
 
-module.exports = { Population };
+    /**
+     * Highchart display formatter.
+     */
+    toHighCharts(): any[][] {
+        const res = [];
+        for (const dist in this.populationByDistrict) {
+            res.push([`${dist} (${this.populationByDistrict[dist]})`, this.populationByDistrict[dist]]);
+        }
+        return res;
+    }
+}

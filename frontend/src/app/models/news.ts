@@ -6,40 +6,38 @@
  * date: timestamp string
  * image: href string
  */
-class LatestNews {
+export class LatestNews {
     /**
      * Number.
      */
-    postId;
+    postId: string;
     /**
      * Title of the article.
      * {string}
      */
-    title;
+    title: string;
     /**
      * Author of the article.
      * {string}
      */
-    author;
+    author: string;
     /**
      * Html Body of the article.
      * {string}
      */
-    body;
+    body: string;
     /**
      * Date of the article.
      * {string}
      */
-    date;
+    date: string;
     /**
      * Image href associated with the article;
      * {string}
      */
-    image;
+    image: string;
 
     constructor({ data }) {
         data && Object.assign(this, data)
     }
 }
-
-module.exports = { LatestNews };
