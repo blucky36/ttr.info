@@ -8,7 +8,7 @@ import { Population } from '../models/population';
   templateUrl: './population.component.html',
   styleUrls: ['./population.component.less']
 })
-export class PopulationComponent implements OnChanges {
+export class PopulationComponent implements OnChanges, OnInit {
   /**
    * Population object from the api.
    */
@@ -21,16 +21,20 @@ export class PopulationComponent implements OnChanges {
    * Instance of the chart to update with changes to the population.
    */
   chartInstance: any;
+
   constructor() { }
 
   ngOnInit() {
     this.buildHighChartsTheme();
     this.chartOptions = this.buildHighChartsConfig();
+    window.setTimeout(() => {
+      const el = document.getElementsByClassName('highcharts-credits');
+      el[0].parentNode.removeChild(el[0]);
+    }, 100);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.population.currentValue && this.chartInstance) {
-      console.log(changes.population.currentValue, this.chartInstance)
       this.chartInstance.context.series[0].update({
         data: this.format(),
       });
@@ -55,6 +59,7 @@ export class PopulationComponent implements OnChanges {
     return {
       chart: {
         type: 'column',
+        animation: false,
       },
       title: {
         text: 'Population'
@@ -108,13 +113,7 @@ export class PopulationComponent implements OnChanges {
       colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
         '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
       chart: {
-        backgroundColor: {
-          linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-          stops: [
-            [0, '#2a2a2b'],
-            [1, '#3e3e40']
-          ]
-        },
+        backgroundColor: '#333',
         style: {
           fontFamily: '\'Unica One\', sans-serif'
         },
@@ -123,14 +122,12 @@ export class PopulationComponent implements OnChanges {
       title: {
         style: {
           color: '#E0E0E3',
-          textTransform: 'uppercase',
           fontSize: '20px'
         }
       },
       subtitle: {
         style: {
           color: '#E0E0E3',
-          textTransform: 'uppercase'
         }
       },
       xAxis: {

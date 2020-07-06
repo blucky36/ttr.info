@@ -21,7 +21,7 @@ export class Population {
     populationByDistrict: { [district: string]: number };
 
     constructor({ data }) {
-        this.lastUpdated = moment(data.lastUpdated);
+        this.lastUpdated = moment(Number(data.lastUpdated) * 1000).format('dddd, MMMM Do YYYY, h:mm:ss a');
         this.totalPopulation = data.totalPopulation;
         this.populationByDistrict = data.populationByDistrict;
     }
