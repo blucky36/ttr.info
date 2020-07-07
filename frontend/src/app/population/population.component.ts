@@ -172,7 +172,7 @@ export class PopulationComponent implements OnChanges, OnInit {
       plotOptions: {
         series: {
           dataLabels: {
-            color: '#F0F0F3',
+            color: '#000',
             style: {
               fontSize: '13px'
             }

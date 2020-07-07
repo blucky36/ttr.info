@@ -18,7 +18,7 @@ const cogHash = {
     'Loan Shark': 'cash',
     'Robber Baron': 'cash',
     'Bottom Feeder': 'law',
-    'Bloodsucker': 'law',
+    'Bloodsucker': 'law',
     'Double Talker': 'law',
     'Ambulance Chaser': 'law',
     'Back Stabber': 'law',
@@ -126,9 +126,6 @@ export class Invasions {
      * Create a series for highcharts.
      */
     createSeriesOfType(name: string) {
-        return {
-            name,
-            data: this.invasions.filter(inv => inv.botType === name)
-        };
+        return { data: this.invasions.filter(inv => inv.botType === name) };
     }
 }

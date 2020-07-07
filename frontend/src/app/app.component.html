@@ -1,16 +1,18 @@
 <div class="flex-container">
-  <div class="population-container">
-    <app-population [population]="population">
-    </app-population>
-  </div>
+  <div class="inner-flex">
+    <div class="population-container">
+      <app-population [population]="population">
+      </app-population>
+    </div>
 
-  <div class="invasion-container">
-    <app-invasions [invasions]="invasions">
-    </app-invasions>
+    <div class="invasion-container">
+      <app-invasions [invasions]="invasions">
+      </app-invasions>
+    </div>
   </div>
 
   <div class="news-container">
-    <app-news>
+    <app-news [news]="news">
     </app-news>
   </div>
 </div>

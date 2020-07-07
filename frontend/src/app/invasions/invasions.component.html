@@ -1,6 +1,65 @@
-<chart [options]="chartOptions"
-  (load)="chartLoad($event)">
-</chart>
+<div class="flex-container">
+  <chart [options]="chartOptions"
+    (load)="chartLoad($event)">
+  </chart>
+
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Cog Type
+          </th>
+          <th>
+            Cog
+          </th>
+          <th>
+            Remaining Cogs
+          </th>
+          <th>
+            Number Defeated
+          </th>
+          <th>
+            Total Supply
+          </th>
+          <th>
+            District
+          </th>
+          <th>
+            Start Time
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let invasion of invasions?.invasions">
+          <td>
+            {{invasion.botType}}
+          </td>
+          <td>
+            {{invasion.cog}}
+          </td>
+          <td>
+            {{invasion.value}}
+          </td>
+          <td>
+            {{invasion.defeated}}
+          </td>
+          <td>
+            {{invasion.total}}
+          </td>
+          <td>
+            {{invasion.district}}
+          </td>
+          <td>
+            {{invasion.startTime.fromNow()}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
 
 

@@ -43,7 +43,7 @@ export class TtrServiceService {
   /**
    * Starts a polling loop returning invasion metrics.
    */
-  invasions$ = () => this.pollingFor$<Invasions>('invasions', Invasions, 10000);
+  invasions$ = () => this.pollingFor$<Invasions>('invasions', Invasions, 5000);
 
   /**
    * Starts a polling loop returning the latest news.

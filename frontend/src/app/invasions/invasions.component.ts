@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import * as Highcharts from 'highcharts';
-require('highcharts/highcharts-more')(Highcharts)
+declare var require: any;
+require('highcharts/highcharts-more')(Highcharts);
 
 import { Invasion, Invasions } from '../models/invasions';
 
@@ -23,6 +24,10 @@ export class InvasionsComponent implements OnInit, OnChanges {
    * Instance of the chart to update with changes to the population.
    */
   chartInstance: any;
+  /**
+   * Emission counter
+   */
+  ccc = 0;
 
   constructor() { }
 
@@ -32,10 +37,10 @@ export class InvasionsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes)
-    if (changes.invasions.currentValue && this.chartInstance) {
+    this.ccc++;
+    if (changes.invasions.currentValue && this.chartInstance && (this.ccc < 5 || this.ccc % 6 === 0)) {
       console.log(this.chartInstance.context.series)
       this.chartInstance.context.series.forEach(s => {
-        // console.log(s, this.invasions.createSeriesOfType(s))
         s.update(this.invasions.createSeriesOfType(s.name.toLowerCase()))
       });
     }
@@ -67,7 +72,7 @@ export class InvasionsComponent implements OnInit, OnChanges {
           minSize: '20%',
           maxSize: '100%',
           zMin: 0,
-          zMax: 100000,
+          zMax: 50000,
           layoutAlgorithm: {
             gravitationalConstant: 0.05,
             splitSeries: true,
@@ -78,13 +83,8 @@ export class InvasionsComponent implements OnInit, OnChanges {
           dataLabels: {
             enabled: true,
             format: '{point.cog}',
-            filter: {
-              property: 'y',
-              operator: '>',
-              value: 250
-            },
             style: {
-              color: 'black!important',
+              color: 'black',
               textOutline: 'none',
               fontWeight: 'normal'
             }
